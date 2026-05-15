@@ -1172,27 +1172,27 @@ dialog .acm-typeahead-list { z-index: 1010; }
 /* ============================================================
    YACHT DETAIL PAGE
    ============================================================ */
-.yacht-page { padding: 2rem clamp(1.25rem, 4vw, 2rem) 0; }
+.yacht-page { padding: 1.5rem clamp(1.25rem, 4vw, 2rem) 0; }
 .breadcrumb {
   max-width: var(--container);
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.4rem;
   font-family: var(--sans);
-  font-size: 0.8rem;
-  color: rgba(26,26,26,0.6);
-  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  color: rgba(26,26,26,0.55);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.breadcrumb a { text-decoration: none; color: var(--navy); margin-right: 0.6rem; }
+.breadcrumb a { text-decoration: none; color: var(--navy); margin-right: 0.5rem; }
 .breadcrumb a:hover { color: var(--brass-deep); }
-.breadcrumb span[aria-hidden] { color: var(--brass); margin-right: 0.6rem; }
+.breadcrumb span[aria-hidden] { color: var(--brass); margin-right: 0.5rem; }
+
 .yacht-hero {
   max-width: var(--container);
-  margin: 0 auto;
+  margin: 0 auto 3rem;
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-  margin-bottom: 4rem;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
 }
 .yacht-hero-image {
   position: relative;
@@ -1201,89 +1201,135 @@ dialog .acm-typeahead-list { z-index: 1010; }
   overflow: hidden;
 }
 .yacht-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.yacht-hero-meta { display: flex; flex-direction: column; }
+.yacht-hero-meta .eyebrow { margin-bottom: 0.5rem; }
 .yacht-hero-meta h1 {
-  font-size: clamp(2rem, 5.4vw, 3.6rem);
-  line-height: 1.1;
-  margin: 0.8rem 0 1.2rem;
+  font-size: clamp(1.85rem, 4.4vw, 2.8rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.008em !important;
+  margin: 0 0 0.6rem;
 }
-.yacht-line { font-family: var(--serif); font-size: 1.1rem; color: rgba(26,26,26,0.7); margin-bottom: 0.6rem; }
-.yacht-price { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--brass-deep); margin-bottom: 1.5rem; }
-.yacht-short { font-size: 1.05rem; line-height: 1.65; color: rgba(26,26,26,0.78); margin-bottom: 2rem; }
+.yacht-line {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: rgba(26,26,26,0.62);
+  margin-bottom: 1.1rem;
+}
+.yacht-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--brass-deep);
+  margin: 0 0 0.4rem;
+}
+.yacht-short {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(26,26,26,0.78);
+  margin: 1.2rem 0 1.4rem;
+  max-width: 48ch;
+}
+.yacht-cta-row {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+.yacht-cta-row .btn-primary,
+.yacht-cta-row .btn-ghost {
+  padding: 0.7rem 1.4rem !important;
+  font-size: 0.85rem !important;
+}
 
 @media (max-width: 880px) {
-  .yacht-hero { grid-template-columns: 1fr; }
+  .yacht-hero {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  .yacht-hero-meta { padding-top: 0; }
 }
 
 .yacht-chips {
-  max-width: var(--container);
-  margin: 0 auto 3rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 1px;
   background: var(--rule);
   border: 1px solid var(--rule);
+  margin: 0.6rem 0 0;
+  max-width: 100%;
 }
 .yacht-chip {
   background: var(--ivory);
-  padding: 1rem 1.2rem;
+  padding: 0.65rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.2rem;
 }
 .yacht-chip span {
   font-family: var(--sans);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--brass-deep);
 }
 .yacht-chip strong {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 1.18rem;
+  font-size: 1rem;
   color: var(--navy);
   line-height: 1.1;
 }
 
-.yacht-gallery {
+.yacht-content {
   max-width: var(--container);
-  margin: 0 auto 4rem;
+  margin: 0 auto 3rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
 }
-.yacht-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-
-.yacht-description, .yacht-specs {
-  max-width: 880px;
-  margin: 0 auto 4rem;
-}
+.yacht-description { min-width: 0; }
+.yacht-specs { min-width: 0; }
 .yacht-description h2, .yacht-specs h2 {
-  font-size: clamp(1.6rem, 3.6vw, 2.2rem) !important;
+  font-size: clamp(1.4rem, 3vw, 1.85rem) !important;
   line-height: 1.15 !important;
   letter-spacing: -0.005em !important;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .yacht-description p {
-  font-size: 1.08rem;
-  line-height: 1.78;
+  font-size: 1.02rem;
+  line-height: 1.72;
   color: rgba(26,26,26,0.82);
-  margin-bottom: 1.2rem;
-  max-width: 64ch;
+  margin-bottom: 1rem;
+  max-width: 62ch;
 }
 .yacht-specs table {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
 }
 .yacht-specs th, .yacht-specs td {
   text-align: left;
-  padding: 0.85rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--rule);
 }
-.yacht-specs th { color: var(--brass-deep); font-weight: 500; font-style: italic; width: 36%; }
+.yacht-specs th { color: var(--brass-deep); font-weight: 500; font-style: italic; width: 40%; }
 .yacht-specs td { color: var(--navy); }
+
+@media (max-width: 880px) {
+  .yacht-content { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.yacht-gallery {
+  max-width: var(--container);
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+.yacht-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 
 /* ============================================================
    MOBILE NAV TWEAKS

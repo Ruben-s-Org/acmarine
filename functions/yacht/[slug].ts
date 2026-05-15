@@ -152,22 +152,25 @@ ${l.hero_image ? `<meta name="twitter:image" content="${esc(l.hero_image)}">` : 
 <section class="yacht-hero">
   <div class="yacht-hero-image">${heroImg}<span class="card-status">${esc(statusLabel(l.status))}</span></div>
   <div class="yacht-hero-meta">
-    <p class="eyebrow">${esc(metaItems || 'Private commission')}</p>
+    <p class="eyebrow">${esc(metaItems || 'Private commission')}${l.boatClass ? ' &middot; ' + esc(l.boatClass) : ''}</p>
     <h1>${esc(l.name)}</h1>
-    ${len ? `<p class="yacht-line">${esc(len)}${l.location ? ' &middot; ' + esc(l.location) : ''}</p>` : ''}
     <p class="yacht-price">${esc(l.price || 'Price upon request')}</p>
+    ${len || l.location ? `<p class="yacht-line">${len ? esc(len) : ''}${len && l.location ? ' &middot; ' : ''}${l.location ? esc(l.location) : ''}</p>` : ''}
+    ${specChips ? `<div class="yacht-chips" aria-label="Specifications at a glance">${specChips}</div>` : ''}
     ${l.short ? `<p class="yacht-short">${esc(l.short)}</p>` : ''}
-    <button type="button" class="btn-primary" data-open-inquire data-listing="${esc(l.slug)}">Request a Viewing</button>
+    <div class="yacht-cta-row">
+      <button type="button" class="btn-primary" data-open-inquire data-listing="${esc(l.slug)}">Request a Viewing</button>
+      <a class="btn-ghost" href="mailto:office@acmarine.com?subject=${encodeURIComponent(l.name)}">Email the office</a>
+    </div>
   </div>
 </section>
 
-${specChips ? `<section class="yacht-chips" aria-label="Specifications at a glance">${specChips}</section>` : ''}
+<section class="yacht-content">
+  ${descHtml ? `<div class="yacht-description"><h2>Notes from the office</h2>${descHtml}</div>` : ''}
+  ${specRows ? `<aside class="yacht-specs"><h2>Specification</h2><table>${specRows}</table></aside>` : ''}
+</section>
 
 ${gallery ? `<section class="yacht-gallery">${gallery}</section>` : ''}
-
-${descHtml ? `<section class="yacht-description"><h2>Notes from the office</h2>${descHtml}</section>` : ''}
-
-${specRows ? `<section class="yacht-specs"><h2>Specification</h2><table>${specRows}</table></section>` : ''}
 
 </main>
 
