@@ -167,7 +167,7 @@
   width: 95%;
   padding: 0;
   border: 1px solid var(--rule);
-  background: var(--ivory);
+  background: var(--ivory-soft);
 }
 .admin-dialog::backdrop {
   background: rgba(6, 21, 40, 0.7);

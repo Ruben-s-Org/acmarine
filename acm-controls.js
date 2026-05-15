@@ -242,8 +242,9 @@
   }
 
   function init() {
-    document.querySelectorAll('select').forEach(enhanceSelect);
-    // Builder typeahead on fleet page
+    const selects = document.querySelectorAll('select');
+    selects.forEach(enhanceSelect);
+    console.info('[acm-controls] enhanced', selects.length, 'selects');
     const builders = document.querySelector('input[name="builder"]');
     if (builders) {
       const dl = document.getElementById('builders-list');
