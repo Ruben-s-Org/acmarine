@@ -62,6 +62,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request }) => {
 };
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+  try {
   if (!(await verifySession(request, env.SESSION_SECRET))) {
     return json({ error: 'unauthorized' }, 401);
   }
@@ -111,4 +112,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   await env.LISTINGS.put(`listing:${id}`, JSON.stringify(listing));
   await env.LISTINGS.put(`slug:${slug}`, id);
   return json({ ok: true, listing });
+  } catch (err) {
+    return json({ error: 'server error', detail: (err as Error)?.message || String(err), stack: (err as any)?.stack?.split('\n').slice(0, 5) }, 500);
+  }
 };
