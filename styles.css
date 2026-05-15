@@ -502,6 +502,19 @@ section {
   margin-top: 1rem;
 }
 .contact-form .btn-primary:hover { background: var(--brass-deep); border-color: var(--brass-deep); color: var(--ivory); }
+
+.contact .contact-actions .btn-primary,
+.contact > .contact-inner .btn-primary {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--navy);
+}
+.contact .contact-actions .btn-primary:hover,
+.contact > .contact-inner .btn-primary:hover {
+  background: var(--ivory-soft);
+  border-color: var(--ivory-soft);
+  color: var(--navy-deep);
+}
 .form-note {
   grid-column: 1 / -1;
   font-size: 0.88rem;
