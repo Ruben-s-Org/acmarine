@@ -36,11 +36,12 @@ h1, h2, h3 {
   letter-spacing: -0.005em;
   color: var(--navy);
   margin: 0;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.6rem, 6.4vw, 5rem); line-height: 1.04; }
-h2 { font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.1; }
-h3 { font-size: 1.45rem; line-height: 1.25; }
+h1 { font-size: clamp(2.2rem, 7.6vw, 5.2rem); line-height: 1.05; }
+h2 { font-size: clamp(1.85rem, 5vw, 3.2rem); line-height: 1.12; }
+h3 { font-size: clamp(1.18rem, 2.6vw, 1.5rem); line-height: 1.25; }
 h1 em { font-style: italic; color: var(--brass); }
 
 p { margin: 0; }
@@ -79,22 +80,184 @@ p { margin: 0; }
 .site-nav a.nav-cta {
   border: 1px solid var(--navy);
   padding: 0.55rem 1.2rem;
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   transition: background 0.2s, color 0.2s;
 }
 .site-nav a.nav-cta:hover { background: var(--navy); color: var(--ivory); }
 
-@media (max-width: 640px) {
-  .site-header { padding: 1rem 1.2rem; }
-  .site-nav { gap: 1.2rem; }
-  .site-nav a:not(.nav-cta) { display: none; }
+.nav-burger {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--rule);
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  margin-left: 0.6rem;
 }
+.nav-burger span {
+  width: 18px; height: 1.5px;
+  background: var(--navy);
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 49;
+  background: var(--ivory);
+  padding: 5.5rem 1.4rem 2rem;
+  border-bottom: 1px solid var(--rule);
+  transform: translateY(-100%);
+  transition: transform 0.32s ease;
+  box-shadow: 0 20px 40px -28px rgba(10,30,58,0.4);
+}
+.mobile-drawer:not([hidden]) { transform: translateY(0); }
+.mobile-drawer[hidden] { display: block !important; transform: translateY(-100%); pointer-events: none; }
+.mobile-drawer nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.drawer-link {
+  text-decoration: none;
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.2s;
+}
+.drawer-link:hover { color: var(--brass-deep); }
+.drawer-cta {
+  margin-top: 1.4rem;
+  background: var(--navy);
+  color: var(--ivory);
+  border: 1px solid var(--navy);
+  padding: 1rem 1.5rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0;
+}
+
+@media (max-width: 760px) {
+  .site-header { padding: 1rem 1.2rem; }
+  .site-nav { gap: 0.6rem; }
+  .site-nav .nav-link { display: none; }
+  .nav-burger { display: flex; }
+}
+
+/* ENQUIRE DIALOG */
+.enquire-dialog {
+  border: none;
+  padding: 0;
+  background: var(--ivory);
+  max-width: 560px;
+  width: 92%;
+  margin: auto;
+  box-shadow: 0 30px 60px -30px rgba(6,21,40,0.6);
+}
+.enquire-dialog::backdrop {
+  background: rgba(6, 21, 40, 0.72);
+  backdrop-filter: blur(6px);
+}
+.enquire-inner {
+  padding: clamp(1.8rem, 4vw, 2.6rem);
+  position: relative;
+}
+.enquire-inner .eyebrow { margin-bottom: 0.8rem; }
+.enquire-inner h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 1rem;
+}
+.enquire-lede {
+  color: rgba(26,26,26,0.7);
+  margin-bottom: 1.8rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+.enquire-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.2rem;
+}
+.enquire-form .field { display: flex; flex-direction: column; gap: 0.45rem; }
+.enquire-form .field-full { grid-column: 1 / -1; }
+.enquire-form .field > span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(26,26,26,0.6);
+}
+.enquire-form input, .enquire-form textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.7rem 0;
+  font-family: var(--serif);
+  color: var(--navy);
+  outline: none;
+  font-size: 16px;
+  resize: vertical;
+}
+.enquire-form input:focus, .enquire-form textarea:focus { border-bottom-color: var(--brass); }
+.enquire-form button[type="submit"] { grid-column: 1 / -1; margin-top: 0.6rem; }
+.enquire-form .form-note {
+  grid-column: 1 / -1;
+  font-size: 0.86rem;
+  color: var(--brass-deep);
+  min-height: 1.2rem;
+}
+.enquire-inner .direct {
+  margin-top: 1.6rem;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: rgba(26,26,26,0.7);
+}
+.enquire-inner .direct a { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brass); }
+.dialog-close {
+  position: absolute;
+  top: 0.8rem; right: 0.8rem;
+  background: transparent;
+  border: none;
+  width: 40px; height: 40px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--navy);
+}
+.dialog-close:hover { color: var(--brass-deep); }
+
+@media (max-width: 540px) {
+  .enquire-form { grid-template-columns: 1fr; }
+}
+
+.section-lede {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: rgba(26,26,26,0.7);
+  line-height: 1.65;
+  max-width: 56ch;
+  margin-top: 1.2rem;
+}
+.contact-actions { margin-bottom: 1.6rem; }
+.btn-large { padding: 1.1rem 2.2rem !important; font-size: 1rem !important; }
 
 /* HERO */
 .hero {
   position: relative;
-  padding: 8rem 2rem 6rem;
+  padding: clamp(3.5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 2rem) clamp(3rem, 7vw, 6rem);
   overflow: hidden;
 }
 .hero-inner {
@@ -102,25 +265,25 @@ p { margin: 0; }
   margin: 0 auto;
 }
 .hero h1 {
-  max-width: 16ch;
-  margin: 1rem 0 1.8rem;
+  max-width: 17ch;
+  margin: clamp(0.75rem, 2vw, 1rem) 0 clamp(1.1rem, 2.6vw, 1.8rem);
 }
 .hero-sub {
   max-width: 60ch;
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
   color: rgba(26, 26, 26, 0.78);
-  line-height: 1.7;
-  margin-bottom: 2.4rem;
+  line-height: 1.65;
+  margin-bottom: clamp(1.6rem, 3.4vw, 2.4rem);
 }
-.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-cta { display: flex; gap: clamp(0.6rem, 1.5vw, 1rem); flex-wrap: wrap; }
 .btn-primary {
   display: inline-block;
   background: var(--navy);
   color: var(--ivory);
   text-decoration: none;
-  padding: 0.95rem 1.8rem;
-  border-radius: 999px;
-  font-size: 0.92rem;
+  padding: clamp(0.8rem, 1.6vw, 0.95rem) clamp(1.3rem, 2.4vw, 1.8rem);
+  border-radius: 0;
+  font-size: clamp(0.82rem, 1.6vw, 0.92rem);
   letter-spacing: 0.06em;
   border: 1px solid var(--navy);
   cursor: pointer;
@@ -134,19 +297,20 @@ p { margin: 0; }
   background: transparent;
   color: var(--navy);
   text-decoration: none;
-  padding: 0.95rem 1.8rem;
-  border-radius: 999px;
-  font-size: 0.92rem;
+  padding: clamp(0.8rem, 1.6vw, 0.95rem) clamp(1.3rem, 2.4vw, 1.8rem);
+  border-radius: 0;
+  font-size: clamp(0.82rem, 1.6vw, 0.92rem);
   letter-spacing: 0.06em;
   border: 1px solid var(--rule);
   transition: border-color 0.2s, color 0.2s;
+  font-family: var(--sans);
 }
 .btn-ghost:hover { border-color: var(--navy); color: var(--brass-deep); }
 .btn-block { width: 100%; }
 
 .hero-rule {
   max-width: var(--container);
-  margin: 5rem auto 0;
+  margin: clamp(2.5rem, 6vw, 5rem) auto 0;
   height: 1px;
   background: var(--rule);
 }
@@ -337,3 +501,259 @@ section {
 
 /* iOS input zoom prevention */
 input, textarea, select, button { font-size: 16px !important; }
+
+/* ============================================================
+   FLEET PREVIEW (HOMEPAGE)
+   ============================================================ */
+.fleet-preview {
+  background: var(--ivory-soft);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.fleet-preview .section-head { margin-bottom: 3rem; }
+.fleet-preview-grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.fleet-loading, .fleet-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  color: rgba(26,26,26,0.6);
+  padding: 3rem 1rem;
+}
+.fleet-cta { max-width: var(--container); margin: 3rem auto 0; text-align: center; }
+
+/* ============================================================
+   YACHT CARDS
+   ============================================================ */
+.yacht-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--ivory);
+  border: 1px solid var(--rule);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s;
+  overflow: hidden;
+}
+.yacht-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 40px -28px rgba(10,30,58,0.5);
+  border-color: var(--brass);
+}
+.yacht-card.is-sold { opacity: 0.7; }
+.yacht-card.is-sold .card-status { background: rgba(26,26,26,0.85); }
+.yacht-card.is-sale-pending .card-status { background: var(--brass-deep); }
+
+.card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+  overflow: hidden;
+}
+.card-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.yacht-card:hover .card-image img { transform: scale(1.04); }
+.card-image-empty {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brass);
+}
+.card-status {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  background: var(--navy);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  font-weight: 500;
+}
+.card-body { padding: 1.5rem clamp(1rem, 2vw, 1.5rem) 1.8rem; }
+.card-meta {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--brass-deep);
+  margin-bottom: 0.7rem;
+}
+.card-name {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--navy);
+}
+.card-spec {
+  font-size: 0.88rem;
+  color: rgba(26,26,26,0.65);
+  margin-bottom: 0.9rem;
+}
+.card-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--navy);
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+}
+
+/* ============================================================
+   FLEET PAGE
+   ============================================================ */
+.fleet-page { min-height: calc(100vh - 200px); }
+.fleet-hero {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2rem) clamp(2rem, 4vw, 3rem);
+}
+.fleet-hero-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.fleet-hero h1 { max-width: 20ch; margin: 1rem 0 1.5rem; }
+.fleet-lede {
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  max-width: 64ch;
+  color: rgba(26,26,26,0.74);
+  line-height: 1.65;
+}
+.fleet-list-section { padding: 2rem clamp(1.25rem, 4vw, 2rem) 6rem; }
+.fleet-filters {
+  max-width: var(--container);
+  margin: 0 auto 2.5rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.filter-pill {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 0.55rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--navy);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  border-radius: 0;
+}
+.filter-pill:hover { border-color: var(--navy); }
+.filter-pill.is-on { background: var(--navy); color: var(--ivory); border-color: var(--navy); }
+.fleet-grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* ============================================================
+   YACHT DETAIL PAGE
+   ============================================================ */
+.yacht-page { padding: 2rem clamp(1.25rem, 4vw, 2rem) 0; }
+.breadcrumb {
+  max-width: var(--container);
+  margin: 0 auto 2rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: rgba(26,26,26,0.6);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.breadcrumb a { text-decoration: none; color: var(--navy); margin-right: 0.6rem; }
+.breadcrumb a:hover { color: var(--brass-deep); }
+.breadcrumb span[aria-hidden] { color: var(--brass); margin-right: 0.6rem; }
+.yacht-hero {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.yacht-hero-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--navy);
+  overflow: hidden;
+}
+.yacht-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.yacht-hero-meta h1 {
+  font-size: clamp(2rem, 5.4vw, 3.6rem);
+  line-height: 1.1;
+  margin: 0.8rem 0 1.2rem;
+}
+.yacht-line { font-family: var(--serif); font-size: 1.1rem; color: rgba(26,26,26,0.7); margin-bottom: 0.6rem; }
+.yacht-price { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--brass-deep); margin-bottom: 1.5rem; }
+.yacht-short { font-size: 1.05rem; line-height: 1.65; color: rgba(26,26,26,0.78); margin-bottom: 2rem; }
+
+@media (max-width: 880px) {
+  .yacht-hero { grid-template-columns: 1fr; }
+}
+
+.yacht-gallery {
+  max-width: var(--container);
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.yacht-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+.yacht-description, .yacht-specs {
+  max-width: 880px;
+  margin: 0 auto 4rem;
+}
+.yacht-description h2, .yacht-specs h2 {
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+  margin-bottom: 1.5rem;
+}
+.yacht-description p {
+  font-size: 1.08rem;
+  line-height: 1.78;
+  color: rgba(26,26,26,0.82);
+  margin-bottom: 1.2rem;
+  max-width: 64ch;
+}
+.yacht-specs table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+}
+.yacht-specs th, .yacht-specs td {
+  text-align: left;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.yacht-specs th { color: var(--brass-deep); font-weight: 500; font-style: italic; width: 36%; }
+.yacht-specs td { color: var(--navy); }
+
+/* ============================================================
+   MOBILE NAV TWEAKS
+   ============================================================ */
+@media (max-width: 640px) {
+  .site-nav { gap: 0.9rem; }
+  .site-nav a:not(.nav-cta) { font-size: 0.8rem; }
+  .site-nav a.nav-cta { padding: 0.5rem 0.95rem; font-size: 0.8rem; }
+  .brand-name { font-size: 1.05rem; }
+  .brand-sub { font-size: 0.6rem; letter-spacing: 0.3em; }
+  .brand-mark { width: 32px; height: 32px; }
+}
+@media (max-width: 460px) {
+  .site-nav a[href="/#approach"] { display: none; }
+}
+

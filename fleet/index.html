@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a1e3a">
+<title>The Fleet. Yachts currently presented by Aldridge &amp; Charles Marine.</title>
+<meta name="description" content="Yachts currently presented by Aldridge &amp; Charles Marine. A short, considered roster of vessels for sale, charter, and management, seen by the office in person before listing.">
+<meta name="keywords" content="yachts for sale, superyacht listings, yacht brokerage, yacht charter, yachts presented, Aldridge and Charles Marine fleet">
+<link rel="canonical" href="https://acmarine.com/fleet">
+<meta property="og:title" content="The Fleet. Aldridge &amp; Charles Marine.">
+<meta property="og:description" content="Yachts currently presented by Aldridge &amp; Charles Marine.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aldridge &amp; Charles Marine">
+<meta property="og:url" content="https://acmarine.com/fleet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Fleet. Aldridge &amp; Charles Marine.">
+<meta name="twitter:description" content="Yachts currently presented by Aldridge &amp; Charles Marine.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="brand" aria-label="Aldridge and Charles Marine">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M22 22 L32 44 L42 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M28 22 L36 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M32 14 L32 50" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-name">Aldridge &amp; Charles</span>
+      <span class="brand-sub">Marine</span>
+    </span>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/fleet" class="nav-link" aria-current="page">Fleet</a>
+    <a href="/#services" class="nav-link">Services</a>
+    <a href="/#approach" class="nav-link">Approach</a>
+    <button type="button" class="nav-cta" data-open-enquire>Enquire</button>
+    <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobile-drawer" class="mobile-drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/" class="drawer-link">Home</a>
+    <a href="/fleet" class="drawer-link">Fleet</a>
+    <a href="/#services" class="drawer-link">Services</a>
+    <a href="/#approach" class="drawer-link">Approach</a>
+    <button type="button" class="drawer-cta" data-open-enquire>Enquire</button>
+  </nav>
+</div>
+
+<main class="fleet-page">
+
+<section class="fleet-hero">
+  <div class="fleet-hero-inner">
+    <p class="eyebrow">The Fleet</p>
+    <h1>Vessels currently presented.</h1>
+    <p class="fleet-lede">
+      A short, considered roster. Each yacht has been seen by the office in person. Enquire to view, to receive the full dossier, or to be introduced to her captain.
+    </p>
+  </div>
+</section>
+
+<section class="fleet-list-section">
+  <div id="fleet-filters" class="fleet-filters" hidden>
+    <button type="button" data-filter="all" class="filter-pill is-on">All</button>
+    <button type="button" data-filter="available" class="filter-pill">Available</button>
+    <button type="button" data-filter="sale-pending" class="filter-pill">Sale Pending</button>
+    <button type="button" data-filter="sold" class="filter-pill">Sold</button>
+  </div>
+  <div id="fleet-grid" class="fleet-grid">
+    <p class="fleet-loading">Loading the current presentation.</p>
+  </div>
+</section>
+
+</main>
+
+<dialog id="enquire-dialog" class="enquire-dialog" aria-labelledby="enquire-title">
+  <div class="enquire-inner">
+    <button type="button" class="dialog-close" data-close-enquire aria-label="Close">&times;</button>
+    <p class="eyebrow">Enquire</p>
+    <h2 id="enquire-title">Write to the office.</h2>
+    <p class="enquire-lede">Tell us, briefly, about the vessel you are interested in or what you are looking for. The director on duty replies within two working days.</p>
+    <form class="enquire-form" id="enquire-form" novalidate>
+      <label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label class="field field-full"><span>Vessel or matter</span><textarea name="message" rows="5" required></textarea></label>
+      <input type="hidden" name="listing_slug" value="">
+      <button type="submit" class="btn-primary btn-block">Send</button>
+      <p class="form-note" role="status" aria-live="polite"></p>
+    </form>
+    <p class="direct">
+      Or write directly:
+      <a href="mailto:office@acmarine.com">office@acmarine.com</a>
+    </p>
+  </div>
+</dialog>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-mark">Aldridge &amp; Charles Marine</p>
+    <p class="footer-meta">Monaco &middot; Antibes &middot; Newport &middot; Seattle</p>
+    <p class="footer-fine">&copy; <span id="year"></span> Aldridge &amp; Charles Marine. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/script.js" defer></script>
+<script src="/fleet.js" defer></script>
+</body>
+</html>

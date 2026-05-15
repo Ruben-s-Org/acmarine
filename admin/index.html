@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1e3a">
+<meta name="robots" content="noindex, nofollow">
+<title>Office. Aldridge &amp; Charles Marine.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/admin.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <a href="/" class="brand">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M22 22 L32 44 L42 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M28 22 L36 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-name">Aldridge &amp; Charles</span>
+      <span class="brand-sub">Office</span>
+    </span>
+  </a>
+  <button id="logout-btn" class="btn-ghost btn-sm" hidden type="button">Sign out</button>
+</header>
+
+<main class="admin-main">
+
+<section id="login-view" class="admin-login" hidden>
+  <h1>Office access</h1>
+  <p class="admin-lede">Enter the office key to manage the fleet.</p>
+  <form id="login-form" autocomplete="off">
+    <label class="field">
+      <span>Office key</span>
+      <input type="password" name="password" autocomplete="current-password" required autofocus>
+    </label>
+    <button type="submit" class="btn-primary">Enter</button>
+    <p class="form-note" id="login-note" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<section id="dashboard-view" class="admin-dashboard" hidden>
+  <div class="admin-tabs">
+    <button type="button" class="tab-btn is-on" data-tab="listings">Listings</button>
+    <button type="button" class="tab-btn" data-tab="enquiries">Enquiries</button>
+  </div>
+
+  <div id="tab-listings" class="tab-panel">
+    <div class="admin-toolbar">
+      <h1>Fleet listings</h1>
+      <button type="button" id="new-listing-btn" class="btn-primary">New listing</button>
+    </div>
+    <div id="admin-listings" class="admin-list">
+      <p class="admin-loading">Loading.</p>
+    </div>
+  </div>
+
+  <div id="tab-enquiries" class="tab-panel" hidden>
+    <div class="admin-toolbar">
+      <h1>Enquiries</h1>
+    </div>
+    <div id="admin-enquiries" class="admin-list">
+      <p class="admin-loading">Loading.</p>
+    </div>
+  </div>
+</section>
+
+<dialog id="listing-dialog" class="admin-dialog">
+  <form method="dialog" id="listing-form" enctype="multipart/form-data">
+    <h2 id="dialog-title">New listing</h2>
+    <input type="hidden" name="id" id="f-id">
+    <div class="admin-grid">
+      <label class="field"><span>Name</span><input type="text" name="name" id="f-name" required></label>
+      <label class="field"><span>Slug (auto if empty)</span><input type="text" name="slug" id="f-slug"></label>
+      <label class="field"><span>Builder</span><input type="text" name="builder" id="f-builder"></label>
+      <label class="field"><span>Year</span><input type="number" name="year" id="f-year" min="1900" max="2100"></label>
+      <label class="field"><span>LOA (metres)</span><input type="number" step="0.1" name="loa_m" id="f-loa"></label>
+      <label class="field"><span>Beam (metres)</span><input type="number" step="0.1" name="beam_m" id="f-beam"></label>
+      <label class="field"><span>Location</span><input type="text" name="location" id="f-location"></label>
+      <label class="field"><span>Price (display)</span><input type="text" name="price" id="f-price" placeholder="EUR 12,500,000 or Price upon request"></label>
+      <label class="field"><span>Status</span>
+        <select name="status" id="f-status">
+          <option value="available">Available</option>
+          <option value="sale-pending">Sale Pending</option>
+          <option value="sold">Sold</option>
+          <option value="draft">Draft (hidden)</option>
+        </select>
+      </label>
+      <label class="field field-full"><span>Short blurb (one line)</span><input type="text" name="short" id="f-short" maxlength="200"></label>
+      <label class="field field-full"><span>Description</span><textarea name="description" id="f-description" rows="6"></textarea></label>
+      <label class="field field-full"><span>Hero image</span><input type="file" name="hero_file" id="f-hero-file" accept="image/jpeg,image/png,image/webp,image/avif"></label>
+      <label class="field field-full"><span>Hero image URL</span><input type="text" name="hero_image" id="f-hero-url" placeholder="/api/images/yachts/&hellip;.jpg"></label>
+      <div class="field field-full" id="hero-preview-wrap" hidden>
+        <span>Hero preview</span>
+        <img id="hero-preview" alt="hero preview">
+      </div>
+      <label class="field field-full"><span>Gallery images (one URL per line)</span><textarea name="gallery" id="f-gallery" rows="4" placeholder="/api/images/yachts/&hellip;.jpg"></textarea></label>
+      <label class="field field-full"><span>Additional gallery upload</span><input type="file" name="gallery_files" id="f-gallery-files" accept="image/jpeg,image/png,image/webp,image/avif" multiple></label>
+      <label class="field field-full"><span>Specs (one per line, e.g. <code>Engines: 2x MAN V12-1900</code>)</span><textarea name="specs" id="f-specs" rows="4"></textarea></label>
+    </div>
+    <p class="form-note" id="dialog-note" role="status" aria-live="polite"></p>
+    <div class="admin-dialog-actions">
+      <button type="button" class="btn-ghost" id="dialog-cancel">Cancel</button>
+      <button type="button" class="btn-primary" id="dialog-save">Save listing</button>
+    </div>
+  </form>
+</dialog>
+
+</main>
+
+<script src="/admin.js" defer></script>
+</body>
+</html>
