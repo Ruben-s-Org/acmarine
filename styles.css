@@ -207,17 +207,25 @@ p { margin: 0; }
   color: rgba(26,26,26,0.6);
 }
 .enquire-form input, .enquire-form textarea {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--rule);
-  padding: 0.7rem 0;
+  background: #ffffff;
+  border: 1px solid #cdc4ad;
+  border-radius: 0;
+  padding: 0.85rem 1rem;
   font-family: var(--serif);
   color: var(--navy);
   outline: none;
   font-size: 16px;
   resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(10,30,58,0.05);
 }
-.enquire-form input:focus, .enquire-form textarea:focus { border-bottom-color: var(--brass); }
+.enquire-form input::placeholder, .enquire-form textarea::placeholder {
+  color: rgba(26,26,26,0.4);
+}
+.enquire-form input:focus, .enquire-form textarea:focus {
+  border-color: var(--brass-deep);
+  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.18);
+}
 .enquire-form button[type="submit"] { grid-column: 1 / -1; margin-top: 0.6rem; }
 .enquire-form .form-note {
   grid-column: 1 / -1;
@@ -363,7 +371,33 @@ section {
   color: rgba(26, 26, 26, 0.74);
   line-height: 1.7;
   max-width: 42ch;
+  margin-bottom: 1.2rem;
 }
+.service-enquire {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.45rem 0;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  border-radius: 0;
+}
+.service-enquire::after {
+  content: "\2192";
+  transform: translateX(0);
+  transition: transform 0.25s;
+  color: var(--brass);
+}
+.service-enquire:hover { color: var(--brass-deep); border-bottom-color: var(--brass-deep); }
+.service-enquire:hover::after { transform: translateX(4px); }
 
 @media (max-width: 760px) {
   .service-grid { grid-template-columns: 1fr; gap: 0; }
@@ -662,9 +696,20 @@ input, textarea, select, button { font-size: 16px !important; }
 .fleet-grid {
   max-width: var(--container);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.fleet-grid > .yacht-card {
+  flex: 1 1 300px;
+  max-width: 420px;
+  min-width: 0;
+}
+.fleet-grid > .fleet-empty,
+.fleet-grid > .fleet-loading { flex: 1 1 100%; }
+@media (max-width: 760px) {
+  .fleet-grid > .yacht-card { flex: 1 1 100%; max-width: 100%; }
 }
 
 /* ============================================================

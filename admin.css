@@ -30,13 +30,21 @@
 .admin-login .field span { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(26,26,26,0.6); }
 .admin-login input {
   width: 100%;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--rule);
-  background: var(--ivory);
+  padding: 0.95rem 1.1rem;
+  border: 1px solid #cdc4ad;
+  background: #ffffff;
   font-family: var(--serif);
+  font-size: 16px !important;
   outline: none;
+  border-radius: 0;
+  color: var(--navy);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(10,30,58,0.05);
 }
-.admin-login input:focus { border-color: var(--brass); }
+.admin-login input:focus {
+  border-color: var(--brass-deep);
+  box-shadow: 0 0 0 2px rgba(176,141,87,0.18);
+}
 
 .admin-tabs {
   display: flex;
@@ -190,15 +198,21 @@
 .admin-grid textarea,
 .admin-grid select {
   width: 100%;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid var(--rule);
-  background: var(--ivory);
+  padding: 0.75rem 0.95rem;
+  border: 1px solid #cdc4ad;
+  background: #ffffff;
   font-family: var(--serif);
-  font-size: 15px !important;
+  font-size: 16px !important;
   color: var(--navy);
   outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(10,30,58,0.05);
 }
-.admin-grid input:focus, .admin-grid textarea:focus, .admin-grid select:focus { border-color: var(--brass); }
+.admin-grid input:focus, .admin-grid textarea:focus, .admin-grid select:focus {
+  border-color: var(--brass-deep);
+  box-shadow: 0 0 0 2px rgba(176,141,87,0.18);
+}
 .admin-grid input[type="file"] { font-size: 14px !important; font-family: var(--sans); }
 #hero-preview { width: 100%; max-width: 320px; aspect-ratio: 4/3; object-fit: cover; border: 1px solid var(--rule); }
 .admin-dialog-actions { display: flex; gap: 0.8rem; justify-content: flex-end; padding-top: 0.4rem; border-top: 1px solid var(--rule); padding-top: 1.4rem; }
