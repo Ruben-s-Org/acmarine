@@ -1,6 +1,7 @@
 import { verifySession } from '../_lib/session';
+import { listEnquiries } from '../_lib/store';
 
-interface Env { LISTINGS: KVNamespace; SESSION_SECRET: string; }
+interface Env { IMAGES: R2Bucket; SESSION_SECRET: string; }
 
 function json(data: any, status = 200): Response {
   return new Response(JSON.stringify(data), {
@@ -10,14 +11,6 @@ function json(data: any, status = 200): Response {
 
 export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
   if (!(await verifySession(request, env.SESSION_SECRET))) return json({ error: 'unauthorized' }, 401);
-  const list = await env.LISTINGS.list({ prefix: 'enquiry:', limit: 200 });
-  const items: any[] = [];
-  for (const key of list.keys) {
-    const raw = await env.LISTINGS.get(key.name);
-    if (raw) {
-      try { items.push(JSON.parse(raw)); } catch {}
-    }
-  }
-  items.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
-  return json({ enquiries: items });
+  const enquiries = await listEnquiries(env.IMAGES);
+  return json({ enquiries });
 };

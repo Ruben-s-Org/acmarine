@@ -1,22 +1,6 @@
-interface Env { LISTINGS: KVNamespace; }
+import { listSlug, Listing } from '../_lib/store';
 
-interface Listing {
-  id: string;
-  slug: string;
-  name: string;
-  builder?: string;
-  year?: number;
-  loa_m?: number;
-  beam_m?: number;
-  price?: string;
-  location?: string;
-  short?: string;
-  description?: string;
-  hero_image?: string;
-  gallery?: string[];
-  specs?: Record<string, string>;
-  status?: string;
-}
+interface Env { IMAGES: R2Bucket; }
 
 function esc(s: any): string {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' } as any)[c]);
@@ -203,12 +187,8 @@ ${specRows ? `<section class="yacht-specs"><h2>Specification</h2><table>${specRo
 
 export const onRequestGet: PagesFunction<Env> = async ({ params, env }) => {
   const slug = String(params.slug || '').toLowerCase();
-  const id = await env.LISTINGS.get(`slug:${slug}`);
-  if (!id) return new Response('not found', { status: 404 });
-  const raw = await env.LISTINGS.get(`listing:${id}`);
-  if (!raw) return new Response('not found', { status: 404 });
-  const listing: Listing = JSON.parse(raw);
-  if (listing.status === 'draft') return new Response('not found', { status: 404 });
+  const listing = await listSlug(env.IMAGES, slug);
+  if (!listing || listing.status === 'draft') return new Response('not found', { status: 404 });
   return new Response(renderHtml(listing), {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
