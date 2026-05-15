@@ -44,7 +44,7 @@ export const onRequestGet: PagesFunction = async ({ params }) => {
   <h1>${esc(loc.name)}.</h1>
   <p class="seo-lede">${esc(loc.name)} is ${esc(loc.flavor)}.</p>
   <div class="hero-cta">
-    <button type="button" class="btn-primary" data-open-enquire data-enquire-service="the ${esc(loc.name)} office">Enquire in ${esc(loc.name)}</button>
+    <button type="button" class="btn-primary" data-open-inquire data-inquire-service="the ${esc(loc.name)} office">Inquire in ${esc(loc.name)}</button>
   </div>
 </section>
 
@@ -74,11 +74,11 @@ export const onRequestGet: PagesFunction = async ({ params }) => {
 
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <p class="eyebrow">Enquire</p>
+    <p class="eyebrow">Inquire</p>
     <h2>Write to the ${esc(loc.name)} office.</h2>
     <p class="contact-lede">The director on duty replies within two working days.</p>
     <div class="contact-actions">
-      <button type="button" class="btn-primary btn-large" data-open-enquire data-enquire-service="the ${esc(loc.name)} office">Open the enquiry form</button>
+      <button type="button" class="btn-primary btn-large" data-open-inquire data-inquire-service="the ${esc(loc.name)} office">Open the inquiry form</button>
     </div>
     <p class="direct">Or write directly: <a href="mailto:office@acmarine.com">office@acmarine.com</a></p>
   </div>

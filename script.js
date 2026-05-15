@@ -10,51 +10,51 @@ if (burger && drawer) {
     document.body.style.overflow = open ? 'hidden' : '';
   };
   burger.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
-  drawer.querySelectorAll('a, button:not([data-open-enquire])').forEach(el => {
+  drawer.querySelectorAll('a, button:not([data-open-inquire])').forEach(el => {
     el.addEventListener('click', () => setOpen(false));
   });
 }
 
-const enquireDialog = document.getElementById('enquire-dialog');
-function openEnquire(listingSlug, service) {
-  if (!enquireDialog) return;
-  const form = enquireDialog.querySelector('#enquire-form');
+const inquireDialog = document.getElementById('inquire-dialog');
+function openInquire(listingSlug, service) {
+  if (!inquireDialog) return;
+  const form = inquireDialog.querySelector('#inquire-form');
   const hiddenSlug = form?.querySelector('input[name="listing_slug"]');
   if (hiddenSlug) hiddenSlug.value = listingSlug || '';
   const messageField = form?.querySelector('textarea[name="message"]');
   if (messageField) {
     let preset = '';
-    if (service) preset = `I would like to enquire about your ${service} service.`;
+    if (service) preset = `I would like to inquire about your ${service} service.`;
     else if (listingSlug) preset = `Regarding ${listingSlug.replace(/-/g, ' ')}.`;
     if (preset && !messageField.value.trim()) messageField.value = preset;
   }
-  const heading = enquireDialog.querySelector('#enquire-title');
+  const heading = inquireDialog.querySelector('#inquire-title');
   if (heading) {
-    if (service) heading.textContent = `${service}. Enquire.`;
+    if (service) heading.textContent = `${service}. Inquire.`;
     else if (listingSlug) heading.textContent = `Request a viewing.`;
     else heading.textContent = `Write to the office.`;
   }
-  if (typeof enquireDialog.showModal === 'function') enquireDialog.showModal();
-  else enquireDialog.setAttribute('open', '');
+  if (typeof inquireDialog.showModal === 'function') inquireDialog.showModal();
+  else inquireDialog.setAttribute('open', '');
   if (burger?.getAttribute('aria-expanded') === 'true') burger.click();
 }
-function closeEnquire() {
-  if (!enquireDialog) return;
-  if (typeof enquireDialog.close === 'function') enquireDialog.close();
-  else enquireDialog.removeAttribute('open');
+function closeInquire() {
+  if (!inquireDialog) return;
+  if (typeof inquireDialog.close === 'function') inquireDialog.close();
+  else inquireDialog.removeAttribute('open');
 }
 document.addEventListener('click', (e) => {
-  const opener = e.target.closest('[data-open-enquire]');
+  const opener = e.target.closest('[data-open-inquire]');
   if (opener) {
     e.preventDefault();
-    openEnquire(opener.dataset.listing || '', opener.dataset.enquireService || '');
+    openInquire(opener.dataset.listing || '', opener.dataset.inquireService || '');
   }
-  const closer = e.target.closest('[data-close-enquire]');
-  if (closer) { e.preventDefault(); closeEnquire(); }
+  const closer = e.target.closest('[data-close-inquire]');
+  if (closer) { e.preventDefault(); closeInquire(); }
 });
-if (enquireDialog) {
-  enquireDialog.addEventListener('click', (e) => {
-    if (e.target === enquireDialog) closeEnquire();
+if (inquireDialog) {
+  inquireDialog.addEventListener('click', (e) => {
+    if (e.target === inquireDialog) closeInquire();
   });
 }
 
@@ -68,7 +68,7 @@ const io = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-document.querySelectorAll('form.enquire-form, form.contact-form').forEach((form) => {
+document.querySelectorAll('form.inquire-form, form.contact-form').forEach((form) => {
   const note = form.querySelector('.form-note');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -78,7 +78,7 @@ document.querySelectorAll('form.enquire-form, form.contact-form').forEach((form)
       return;
     }
     try {
-      const res = await fetch('/api/enquire', {
+      const res = await fetch('/api/inquire', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -86,8 +86,8 @@ document.querySelectorAll('form.enquire-form, form.contact-form').forEach((form)
       if (res.ok) {
         if (note) { note.textContent = 'Thank you. The office will write to you.'; note.style.color = ''; }
         form.reset();
-        if (form.classList.contains('enquire-form')) {
-          setTimeout(closeEnquire, 1400);
+        if (form.classList.contains('inquire-form')) {
+          setTimeout(closeInquire, 1400);
         }
       } else {
         if (note) { note.textContent = 'Something went wrong. Please write to office@acmarine.com directly.'; note.style.color = '#e8b34a'; }

@@ -60,11 +60,11 @@ export const onRequestGet: PagesFunction<Env> = async ({ params, env }) => {
 
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <p class="eyebrow">Enquire</p>
+    <p class="eyebrow">Inquire</p>
     <h2>Write to the office.</h2>
     <p class="contact-lede">If this article raised a question worth answering, write. The director on duty replies within two working days.</p>
     <div class="contact-actions">
-      <button type="button" class="btn-primary btn-large" data-open-enquire>Open the enquiry form</button>
+      <button type="button" class="btn-primary btn-large" data-open-inquire>Open the inquiry form</button>
     </div>
     <p class="direct">Or write directly: <a href="mailto:office@acmarine.com">office@acmarine.com</a></p>
   </div>

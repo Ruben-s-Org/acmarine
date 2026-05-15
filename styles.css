@@ -168,8 +168,8 @@ p { margin: 0; }
   .nav-burger { display: flex; }
 }
 
-/* ENQUIRE DIALOG */
-.enquire-dialog {
+/* INQUIRE DIALOG */
+.inquire-dialog {
   border: none;
   padding: 0;
   background: var(--ivory);
@@ -178,39 +178,39 @@ p { margin: 0; }
   margin: auto;
   box-shadow: 0 30px 60px -30px rgba(6,21,40,0.6);
 }
-.enquire-dialog::backdrop {
+.inquire-dialog::backdrop {
   background: rgba(6, 21, 40, 0.72);
   backdrop-filter: blur(6px);
 }
-.enquire-inner {
+.inquire-inner {
   padding: clamp(1.8rem, 4vw, 2.6rem);
   position: relative;
 }
-.enquire-inner .eyebrow { margin-bottom: 0.8rem; }
-.enquire-inner h2 {
+.inquire-inner .eyebrow { margin-bottom: 0.8rem; }
+.inquire-inner h2 {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   margin-bottom: 1rem;
 }
-.enquire-lede {
+.inquire-lede {
   color: rgba(26,26,26,0.7);
   margin-bottom: 1.8rem;
   font-size: 0.98rem;
   line-height: 1.6;
 }
-.enquire-form {
+.inquire-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem 1.2rem;
 }
-.enquire-form .field { display: flex; flex-direction: column; gap: 0.45rem; }
-.enquire-form .field-full { grid-column: 1 / -1; }
-.enquire-form .field > span {
+.inquire-form .field { display: flex; flex-direction: column; gap: 0.45rem; }
+.inquire-form .field-full { grid-column: 1 / -1; }
+.inquire-form .field > span {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: rgba(26,26,26,0.6);
 }
-.enquire-form input, .enquire-form textarea {
+.inquire-form input, .inquire-form textarea {
   background: #ffffff;
   border: 1px solid #cdc4ad;
   border-radius: 0;
@@ -223,27 +223,27 @@ p { margin: 0; }
   transition: border-color 0.2s, box-shadow 0.2s;
   box-shadow: 0 1px 2px rgba(10,30,58,0.05);
 }
-.enquire-form input::placeholder, .enquire-form textarea::placeholder {
+.inquire-form input::placeholder, .inquire-form textarea::placeholder {
   color: rgba(26,26,26,0.4);
 }
-.enquire-form input:focus, .enquire-form textarea:focus {
+.inquire-form input:focus, .inquire-form textarea:focus {
   border-color: var(--brass-deep);
   box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.18);
 }
-.enquire-form button[type="submit"] { grid-column: 1 / -1; margin-top: 0.6rem; }
-.enquire-form .form-note {
+.inquire-form button[type="submit"] { grid-column: 1 / -1; margin-top: 0.6rem; }
+.inquire-form .form-note {
   grid-column: 1 / -1;
   font-size: 0.86rem;
   color: var(--brass-deep);
   min-height: 1.2rem;
 }
-.enquire-inner .direct {
+.inquire-inner .direct {
   margin-top: 1.6rem;
   font-family: var(--serif);
   font-size: 1.05rem;
   color: rgba(26,26,26,0.7);
 }
-.enquire-inner .direct a { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brass); }
+.inquire-inner .direct a { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brass); }
 .dialog-close {
   position: absolute;
   top: 0.8rem; right: 0.8rem;
@@ -257,7 +257,7 @@ p { margin: 0; }
 .dialog-close:hover { color: var(--brass-deep); }
 
 @media (max-width: 540px) {
-  .enquire-form { grid-template-columns: 1fr; }
+  .inquire-form { grid-template-columns: 1fr; }
 }
 
 .section-lede {
@@ -380,7 +380,7 @@ section {
   max-width: 42ch;
   margin-bottom: 1.2rem;
 }
-.service-enquire {
+.service-inquire {
   display: inline-block;
   background: transparent;
   border: none;
@@ -400,7 +400,7 @@ section {
   letter-spacing: 0;
   text-transform: none;
 }
-.service-enquire:hover {
+.service-inquire:hover {
   color: var(--navy);
   text-decoration-color: var(--brass);
 }
@@ -730,6 +730,125 @@ button:disabled, input:disabled { opacity: 0.5; cursor: not-allowed; }
   .yacht-card:hover { transform: none; box-shadow: none; }
   .seo-loc-card:hover, .seo-related-card:hover { transform: none; box-shadow: none; }
 }
+
+/* ============================================================
+   CUSTOM SELECT (no system dropdown anywhere)
+   ============================================================ */
+
+select.acm-select-native {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.acm-select {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.acm-select-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  background: #ffffff;
+  border: 1px solid #cdc4ad;
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: 16px !important;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0;
+  gap: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  line-height: 1.4;
+  min-height: 44px;
+}
+.acm-select-toggle:hover { border-color: var(--brass-deep); }
+.acm-select-toggle[aria-expanded="true"],
+.acm-select-toggle:focus {
+  outline: none;
+  border-color: var(--brass-deep);
+  box-shadow: 0 0 0 2px rgba(176,141,87,0.2);
+}
+.acm-select-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.acm-select-chevron {
+  display: inline-flex;
+  width: 12px;
+  height: 8px;
+  flex-shrink: 0;
+  color: var(--brass-deep);
+  transition: transform 0.2s;
+}
+.acm-select-chevron svg { width: 100%; height: 100%; display: block; }
+.acm-select-toggle[aria-expanded="true"] .acm-select-chevron { transform: rotate(180deg); }
+
+.acm-select-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0;
+  background: #ffffff;
+  border: 1px solid #cdc4ad;
+  max-height: 320px;
+  overflow-y: auto;
+  box-shadow: 0 24px 48px -28px rgba(10,30,58,0.4);
+  overscroll-behavior: contain;
+}
+.acm-select-list li {
+  padding: 0.75rem 1rem;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--navy);
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.acm-select-list li:focus,
+.acm-select-list li:hover {
+  background: var(--ivory-soft);
+}
+.acm-select-list li[aria-selected="true"] {
+  background: var(--navy);
+  color: var(--ivory);
+}
+.acm-select-list li[aria-selected="true"]:hover,
+.acm-select-list li[aria-selected="true"]:focus {
+  background: var(--navy-deep);
+}
+
+/* Custom typeahead (text input + suggestions list) */
+.acm-typeahead {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.acm-typeahead input { width: 100%; }
+.acm-typeahead-list {
+  /* uses .acm-select-list base styles */
+}
+
+/* When inside a dialog, drop position is still absolute; ensure z-index above dialog content */
+dialog .acm-select-list,
+dialog .acm-typeahead-list { z-index: 1010; }
 
 /* ============================================================
    FLEET PREVIEW (HOMEPAGE)

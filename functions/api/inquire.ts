@@ -1,4 +1,4 @@
-import { appendEnquiry } from '../_lib/store';
+import { appendInquiry } from '../_lib/store';
 
 interface Env { IMAGES: R2Bucket; }
 
@@ -13,7 +13,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!body) return json({ error: 'invalid' }, 400);
   const { name, email, message, listing_slug } = body || {};
   if (!name || !email || !message) return json({ error: 'missing fields' }, 400);
-  await appendEnquiry(env.IMAGES, {
+  await appendInquiry(env.IMAGES, {
     id: crypto.randomUUID(),
     name: String(name).slice(0, 200),
     email: String(email).slice(0, 200),

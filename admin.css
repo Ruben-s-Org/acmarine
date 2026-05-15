@@ -139,22 +139,22 @@
 .admin-row-actions button:hover { border-color: var(--navy); }
 .admin-row-actions button.danger:hover { background: #b00020; color: white; border-color: #b00020; }
 
-.enquiry-row {
+.inquiry-row {
   padding: 1.2rem 1.4rem;
   background: var(--ivory);
   border: 1px solid var(--rule);
 }
-.enquiry-head {
+.inquiry-head {
   display: flex; justify-content: space-between; align-items: baseline;
   margin-bottom: 0.6rem;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.enquiry-name { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); }
-.enquiry-date { font-size: 0.78rem; color: rgba(26,26,26,0.5); }
-.enquiry-email a { color: var(--brass-deep); }
-.enquiry-listing { font-size: 0.82rem; color: rgba(26,26,26,0.6); margin-top: 0.4rem; font-style: italic; }
-.enquiry-msg {
+.inquiry-name { font-family: var(--serif); font-size: 1.1rem; color: var(--navy); }
+.inquiry-date { font-size: 0.78rem; color: rgba(26,26,26,0.5); }
+.inquiry-email a { color: var(--brass-deep); }
+.inquiry-listing { font-size: 0.82rem; color: rgba(26,26,26,0.6); margin-top: 0.4rem; font-style: italic; }
+.inquiry-msg {
   margin-top: 0.8rem;
   font-size: 0.95rem;
   color: rgba(26,26,26,0.82);

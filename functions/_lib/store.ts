@@ -49,7 +49,7 @@ export async function listSlug(bucket: R2Bucket, slug: string): Promise<Listing 
   return null;
 }
 
-export interface Enquiry {
+export interface Inquiry {
   id: string;
   name: string;
   email: string;
@@ -58,16 +58,16 @@ export interface Enquiry {
   created_at: string;
 }
 
-export async function appendEnquiry(bucket: R2Bucket, e: Enquiry): Promise<void> {
-  const key = `_meta/enquiries/${e.created_at}-${e.id}.json`;
+export async function appendInquiry(bucket: R2Bucket, e: Inquiry): Promise<void> {
+  const key = `_meta/inquiries/${e.created_at}-${e.id}.json`;
   await bucket.put(key, JSON.stringify(e), {
     httpMetadata: { contentType: 'application/json', cacheControl: 'no-store' },
   });
 }
 
-export async function listEnquiries(bucket: R2Bucket, limit = 200): Promise<Enquiry[]> {
-  const list = await bucket.list({ prefix: '_meta/enquiries/', limit });
-  const items: Enquiry[] = [];
+export async function listInquiries(bucket: R2Bucket, limit = 200): Promise<Inquiry[]> {
+  const list = await bucket.list({ prefix: '_meta/inquiries/', limit });
+  const items: Inquiry[] = [];
   for (const o of list.objects) {
     const obj = await bucket.get(o.key);
     if (!obj) continue;

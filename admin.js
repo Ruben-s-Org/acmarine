@@ -30,7 +30,7 @@ async function checkAuth() {
     if (data.authenticated) {
       show('dashboard');
       loadListings();
-      loadEnquiries();
+      loadInquiries();
     } else {
       show('login');
     }
@@ -54,7 +54,7 @@ loginForm.addEventListener('submit', async (e) => {
       loginNote.textContent = '';
       show('dashboard');
       loadListings();
-      loadEnquiries();
+      loadInquiries();
     } else {
       loginNote.textContent = 'Incorrect key.';
       loginNote.style.color = '#b00020';
@@ -130,32 +130,32 @@ async function loadListings() {
   }
 }
 
-async function loadEnquiries() {
-  const wrap = document.getElementById('admin-enquiries');
+async function loadInquiries() {
+  const wrap = document.getElementById('admin-inquiries');
   wrap.innerHTML = '<p class="admin-loading">Loading.</p>';
   try {
-    const res = await fetch('/api/enquiries');
+    const res = await fetch('/api/inquiries');
     const data = await res.json();
-    const items = data.enquiries || [];
+    const items = data.inquiries || [];
     if (items.length === 0) {
-      wrap.innerHTML = '<p class="admin-loading">No enquiries yet.</p>';
+      wrap.innerHTML = '<p class="admin-loading">No inquiries yet.</p>';
       return;
     }
     wrap.innerHTML = items.map(e => `
-      <div class="enquiry-row">
-        <div class="enquiry-head">
+      <div class="inquiry-row">
+        <div class="inquiry-head">
           <div>
-            <span class="enquiry-name">${escapeHtml(e.name)}</span>
-            <span class="enquiry-email"> &middot; <a href="mailto:${escapeHtml(e.email)}">${escapeHtml(e.email)}</a></span>
+            <span class="inquiry-name">${escapeHtml(e.name)}</span>
+            <span class="inquiry-email"> &middot; <a href="mailto:${escapeHtml(e.email)}">${escapeHtml(e.email)}</a></span>
           </div>
-          <span class="enquiry-date">${escapeHtml(new Date(e.created_at).toLocaleString())}</span>
+          <span class="inquiry-date">${escapeHtml(new Date(e.created_at).toLocaleString())}</span>
         </div>
-        ${e.listing_slug ? `<p class="enquiry-listing">Re: <a href="/yacht/${encodeURIComponent(e.listing_slug)}" target="_blank">${escapeHtml(e.listing_slug)}</a></p>` : ''}
-        <p class="enquiry-msg">${escapeHtml(e.message)}</p>
+        ${e.listing_slug ? `<p class="inquiry-listing">Re: <a href="/yacht/${encodeURIComponent(e.listing_slug)}" target="_blank">${escapeHtml(e.listing_slug)}</a></p>` : ''}
+        <p class="inquiry-msg">${escapeHtml(e.message)}</p>
       </div>
     `).join('');
   } catch {
-    wrap.innerHTML = '<p class="admin-loading">Error loading enquiries.</p>';
+    wrap.innerHTML = '<p class="admin-loading">Error loading inquiries.</p>';
   }
 }
 

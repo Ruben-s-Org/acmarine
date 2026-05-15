@@ -51,7 +51,7 @@ export const onRequestGet: PagesFunction = async ({ params }) => {
   <h1>${esc(svc.name)}.</h1>
   <p class="seo-lede">${esc(svc.tagline)}</p>
   <div class="hero-cta">
-    <button type="button" class="btn-primary" data-open-enquire data-enquire-service="${esc(svc.name)}">Enquire about ${esc(svc.shortName)}</button>
+    <button type="button" class="btn-primary" data-open-inquire data-inquire-service="${esc(svc.name)}">Inquire about ${esc(svc.shortName)}</button>
   </div>
 </section>
 
@@ -102,11 +102,11 @@ export const onRequestGet: PagesFunction = async ({ params }) => {
 
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <p class="eyebrow">Enquire</p>
-    <h2>${esc(svc.shortName)} enquiries.</h2>
+    <p class="eyebrow">Inquire</p>
+    <h2>${esc(svc.shortName)} inquiries.</h2>
     <p class="contact-lede">Write to the office. The director on duty replies within two working days.</p>
     <div class="contact-actions">
-      <button type="button" class="btn-primary btn-large" data-open-enquire data-enquire-service="${esc(svc.name)}">Open the enquiry form</button>
+      <button type="button" class="btn-primary btn-large" data-open-inquire data-inquire-service="${esc(svc.name)}">Open the inquiry form</button>
     </div>
     <p class="direct">Or write directly: <a href="mailto:office@acmarine.com">office@acmarine.com</a></p>
   </div>

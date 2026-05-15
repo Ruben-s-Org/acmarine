@@ -106,7 +106,7 @@ ${l.hero_image ? `<meta name="twitter:image" content="${esc(l.hero_image)}">` : 
     <a href="/fleet" class="nav-link">Fleet</a>
     <a href="/#services" class="nav-link">Services</a>
     <a href="/#approach" class="nav-link">Approach</a>
-    <button type="button" class="nav-cta" data-open-enquire data-listing="${esc(l.slug)}">Enquire</button>
+    <button type="button" class="nav-cta" data-open-inquire data-listing="${esc(l.slug)}">Inquire</button>
     <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
       <span></span><span></span><span></span>
     </button>
@@ -119,7 +119,7 @@ ${l.hero_image ? `<meta name="twitter:image" content="${esc(l.hero_image)}">` : 
     <a href="/fleet" class="drawer-link">Fleet</a>
     <a href="/#services" class="drawer-link">Services</a>
     <a href="/#approach" class="drawer-link">Approach</a>
-    <button type="button" class="drawer-cta" data-open-enquire data-listing="${esc(l.slug)}">Enquire</button>
+    <button type="button" class="drawer-cta" data-open-inquire data-listing="${esc(l.slug)}">Inquire</button>
   </nav>
 </div>
 
@@ -139,7 +139,7 @@ ${l.hero_image ? `<meta name="twitter:image" content="${esc(l.hero_image)}">` : 
     ${len ? `<p class="yacht-line">${esc(len)}${l.location ? ' &middot; ' + esc(l.location) : ''}</p>` : ''}
     <p class="yacht-price">${esc(l.price || 'Price upon request')}</p>
     ${l.short ? `<p class="yacht-short">${esc(l.short)}</p>` : ''}
-    <button type="button" class="btn-primary" data-open-enquire data-listing="${esc(l.slug)}">Request a Viewing</button>
+    <button type="button" class="btn-primary" data-open-inquire data-listing="${esc(l.slug)}">Request a Viewing</button>
   </div>
 </section>
 
@@ -151,13 +151,13 @@ ${specRows ? `<section class="yacht-specs"><h2>Specification</h2><table>${specRo
 
 </main>
 
-<dialog id="enquire-dialog" class="enquire-dialog" aria-labelledby="enquire-title">
-  <div class="enquire-inner">
-    <button type="button" class="dialog-close" data-close-enquire aria-label="Close">&times;</button>
-    <p class="eyebrow">Enquire</p>
-    <h2 id="enquire-title">Request a viewing of ${esc(l.name)}.</h2>
-    <p class="enquire-lede">The director on duty replies within two working days.</p>
-    <form class="enquire-form" id="enquire-form" novalidate>
+<dialog id="inquire-dialog" class="inquire-dialog" aria-labelledby="inquire-title">
+  <div class="inquire-inner">
+    <button type="button" class="dialog-close" data-close-inquire aria-label="Close">&times;</button>
+    <p class="eyebrow">Inquire</p>
+    <h2 id="inquire-title">Request a viewing of ${esc(l.name)}.</h2>
+    <p class="inquire-lede">The director on duty replies within two working days.</p>
+    <form class="inquire-form" id="inquire-form" novalidate>
       <label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
       <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
       <label class="field field-full"><span>Message</span><textarea name="message" rows="5" required>Regarding ${esc(l.name)}.</textarea></label>
@@ -175,11 +175,11 @@ ${specRows ? `<section class="yacht-specs"><h2>Specification</h2><table>${specRo
 <footer class="site-footer">
   <div class="footer-inner">
     <p class="footer-mark">Aldridge &amp; Charles Marine</p>
-    <p class="footer-meta">Monaco &middot; Antibes &middot; Newport &middot; Seattle</p>
     <p class="footer-fine">&copy; <span id="year"></span> Aldridge &amp; Charles Marine. All rights reserved.</p>
   </div>
 </footer>
 
+<script src="/acm-controls.js" defer></script>
 <script src="/script.js" defer></script>
 </body>
 </html>`;
