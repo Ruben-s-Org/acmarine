@@ -7,6 +7,7 @@ export interface Listing {
   loa_m?: number;
   beam_m?: number;
   price?: string;
+  price_num?: number;
   location?: string;
   short?: string;
   description?: string;
@@ -14,6 +15,9 @@ export interface Listing {
   gallery?: string[];
   specs?: Record<string, string>;
   status?: 'available' | 'sale-pending' | 'sold' | 'draft';
+  type?: 'motor' | 'sail';
+  condition?: 'new' | 'used' | 'refit';
+  class_society?: string;
   created_at: string;
   updated_at: string;
 }
@@ -80,4 +84,38 @@ export function slugify(s: string): string {
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
     .slice(0, 80);
+}
+
+export interface Article {
+  slug: string;
+  title: string;
+  seo_title?: string;
+  description: string;
+  keywords?: string[];
+  content: string;
+  category?: string;
+  image_url?: string;
+  source_guid: string;
+  published_at: string;
+  created_at: string;
+}
+
+const ARTICLE_PREFIX = '_meta/articles/';
+
+export async function listArticles(bucket: R2Bucket, limit = 200): Promise<Article[]> {
+  const list = await bucket.list({ prefix: ARTICLE_PREFIX, limit });
+  const items: Article[] = [];
+  for (const o of list.objects) {
+    const obj = await bucket.get(o.key);
+    if (!obj) continue;
+    try { items.push(JSON.parse(await obj.text())); } catch {}
+  }
+  items.sort((a, b) => (b.published_at || b.created_at || '').localeCompare(a.published_at || a.created_at || ''));
+  return items;
+}
+
+export async function getArticle(bucket: R2Bucket, slug: string): Promise<Article | null> {
+  const obj = await bucket.get(`${ARTICLE_PREFIX}${slug}.json`);
+  if (!obj) return null;
+  try { return JSON.parse(await obj.text()) as Article; } catch { return null; }
 }

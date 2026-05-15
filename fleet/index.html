@@ -41,7 +41,7 @@
   <nav class="site-nav" aria-label="Primary">
     <a href="/fleet" class="nav-link" aria-current="page">Fleet</a>
     <a href="/#services" class="nav-link">Services</a>
-    <a href="/#approach" class="nav-link">Approach</a>
+    <a href="/articles" class="nav-link">Articles</a>
     <button type="button" class="nav-cta" data-open-enquire>Enquire</button>
     <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
       <span></span><span></span><span></span>
@@ -54,30 +54,83 @@
     <a href="/" class="drawer-link">Home</a>
     <a href="/fleet" class="drawer-link">Fleet</a>
     <a href="/#services" class="drawer-link">Services</a>
-    <a href="/#approach" class="drawer-link">Approach</a>
+    <a href="/articles" class="drawer-link">Articles</a>
+    <a href="/contact" class="drawer-link">Contact</a>
     <button type="button" class="drawer-cta" data-open-enquire>Enquire</button>
   </nav>
 </div>
 
 <main class="fleet-page">
 
-<section class="fleet-hero">
+<section class="fleet-hero fleet-hero-grand">
   <div class="fleet-hero-inner">
-    <p class="eyebrow">The Fleet</p>
+    <p class="eyebrow">Brokerage</p>
     <h1>Vessels currently presented.</h1>
     <p class="fleet-lede">
-      A short, considered roster. Each yacht has been seen by the office in person. Enquire to view, to receive the full dossier, or to be introduced to her captain.
+      A short, considered roster. Each yacht has been seen by the office in person before listing. Search the dossier, then write to view, to receive the full briefing, or to be introduced to her captain.
     </p>
   </div>
 </section>
 
 <section class="fleet-list-section">
-  <div id="fleet-filters" class="fleet-filters" hidden>
-    <button type="button" data-filter="all" class="filter-pill is-on">All</button>
-    <button type="button" data-filter="available" class="filter-pill">Available</button>
-    <button type="button" data-filter="sale-pending" class="filter-pill">Sale Pending</button>
-    <button type="button" data-filter="sold" class="filter-pill">Sold</button>
-  </div>
+  <form id="fleet-search" class="fleet-search" hidden>
+    <div class="fs-row">
+      <label class="fs-field">
+        <span>Type</span>
+        <select name="type"><option value="">Sail &amp; Motor</option><option value="motor">Motor</option><option value="sail">Sail</option></select>
+      </label>
+      <label class="fs-field">
+        <span>Condition</span>
+        <select name="condition"><option value="">Any</option><option value="new">New</option><option value="used">Used</option><option value="refit">Recently refit</option></select>
+      </label>
+      <label class="fs-field">
+        <span>Class</span>
+        <select name="class_society"><option value="">Any</option><option value="Lloyd's">Lloyd's</option><option value="Bureau Veritas">Bureau Veritas</option><option value="RINA">RINA</option><option value="ABS">ABS</option><option value="DNV">DNV</option><option value="MCA">MCA</option></select>
+      </label>
+      <label class="fs-field">
+        <span>Make</span>
+        <input type="text" name="builder" placeholder="Lurssen, Feadship&hellip;" list="builders-list">
+      </label>
+      <datalist id="builders-list"></datalist>
+    </div>
+    <div class="fs-row">
+      <div class="fs-field fs-range">
+        <span>Length</span>
+        <div class="fs-range-row">
+          <input type="number" name="loa_min" placeholder="Min" min="0">
+          <input type="number" name="loa_max" placeholder="Max" min="0">
+          <div class="fs-toggle" role="radiogroup" aria-label="Length unit">
+            <button type="button" data-unit="m" class="is-on">m</button>
+            <button type="button" data-unit="ft">ft</button>
+          </div>
+        </div>
+      </div>
+      <div class="fs-field fs-range">
+        <span>Year</span>
+        <div class="fs-range-row">
+          <input type="number" name="year_min" placeholder="From" min="1900" max="2100">
+          <input type="number" name="year_max" placeholder="To" min="1900" max="2100">
+        </div>
+      </div>
+      <div class="fs-field fs-range">
+        <span>Price (USD)</span>
+        <div class="fs-range-row">
+          <input type="number" name="price_min" placeholder="Min" min="0" step="100000">
+          <input type="number" name="price_max" placeholder="Max" min="0" step="100000">
+        </div>
+      </div>
+      <div class="fs-field fs-actions">
+        <button type="submit" class="btn-primary">Search</button>
+        <button type="reset" class="btn-ghost">Reset</button>
+      </div>
+    </div>
+    <div class="fs-statuses">
+      <button type="button" data-status="all" class="filter-pill is-on">All listings</button>
+      <button type="button" data-status="available" class="filter-pill">Available</button>
+      <button type="button" data-status="sale-pending" class="filter-pill">Sale Pending</button>
+      <button type="button" data-status="sold" class="filter-pill">Sold</button>
+    </div>
+  </form>
   <div id="fleet-grid" class="fleet-grid">
     <p class="fleet-loading">Loading the current presentation.</p>
   </div>

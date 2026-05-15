@@ -54,6 +54,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       loa_m: typeof body.loa_m === 'number' ? body.loa_m : existingObj.loa_m,
       beam_m: typeof body.beam_m === 'number' ? body.beam_m : existingObj.beam_m,
       price: body.price?.toString() || existingObj.price,
+      price_num: typeof body.price_num === 'number' ? body.price_num : existingObj.price_num,
       location: body.location?.toString() || existingObj.location,
       short: body.short?.toString() || existingObj.short,
       description: body.description?.toString() || existingObj.description,
@@ -61,6 +62,9 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       gallery: Array.isArray(body.gallery) ? body.gallery : existingObj.gallery,
       specs: typeof body.specs === 'object' && body.specs ? body.specs as any : existingObj.specs,
       status: (body.status as any) || existingObj.status || 'available',
+      type: (body.type as any) || existingObj.type,
+      condition: (body.condition as any) || existingObj.condition,
+      class_society: body.class_society?.toString() || existingObj.class_society,
       created_at: existingObj.created_at || now,
       updated_at: now,
     };

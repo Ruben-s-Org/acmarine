@@ -172,6 +172,10 @@ function openDialog(item) {
   document.getElementById('f-beam').value = item?.beam_m || '';
   document.getElementById('f-location').value = item?.location || '';
   document.getElementById('f-price').value = item?.price || '';
+  document.getElementById('f-price-num').value = item?.price_num || '';
+  document.getElementById('f-type').value = item?.type || '';
+  document.getElementById('f-condition').value = item?.condition || '';
+  document.getElementById('f-class').value = item?.class_society || '';
   document.getElementById('f-status').value = item?.status || 'available';
   document.getElementById('f-short').value = item?.short || '';
   document.getElementById('f-description').value = item?.description || '';
@@ -243,6 +247,10 @@ dialogSave.addEventListener('click', async () => {
       beam_m: parseFloat(document.getElementById('f-beam').value) || undefined,
       location: document.getElementById('f-location').value.trim() || undefined,
       price: document.getElementById('f-price').value.trim() || undefined,
+      price_num: parseFloat(document.getElementById('f-price-num').value) || undefined,
+      type: document.getElementById('f-type').value || undefined,
+      condition: document.getElementById('f-condition').value || undefined,
+      class_society: document.getElementById('f-class').value.trim() || undefined,
       status: document.getElementById('f-status').value,
       short: document.getElementById('f-short').value.trim() || undefined,
       description: document.getElementById('f-description').value.trim() || undefined,

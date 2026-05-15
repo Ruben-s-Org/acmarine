@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1e3a">
+<title>Privacy. Aldridge &amp; Charles Marine.</title>
+<meta name="description" content="The privacy notice of Aldridge &amp; Charles Marine. How the office handles enquiries, client data, and correspondence.">
+<link rel="canonical" href="https://acmarine.com/privacy">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap"></noscript>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="brand" aria-label="Aldridge and Charles Marine">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M22 22 L32 44 L42 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M28 22 L36 22" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M32 14 L32 50" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-name">Aldridge &amp; Charles</span>
+      <span class="brand-sub">Marine</span>
+    </span>
+  </a>
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/fleet" class="nav-link">Fleet</a>
+    <a href="/#services" class="nav-link">Services</a>
+    <a href="/articles" class="nav-link">Articles</a>
+    <button type="button" class="nav-cta" data-open-enquire>Enquire</button>
+    <button type="button" class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobile-drawer" class="mobile-drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/" class="drawer-link">Home</a>
+    <a href="/fleet" class="drawer-link">Fleet</a>
+    <a href="/#services" class="drawer-link">Services</a>
+    <a href="/articles" class="drawer-link">Articles</a>
+    <a href="/contact" class="drawer-link">Contact</a>
+    <button type="button" class="drawer-cta" data-open-enquire>Enquire</button>
+  </nav>
+</div>
+
+<main class="legal-page">
+  <p class="eyebrow">Privacy</p>
+  <h1>Privacy notice.</h1>
+  <p class="updated">Last updated 15 May 2026.</p>
+
+  <h2>What we collect</h2>
+  <p>When you write to Aldridge &amp; Charles Marine through this site, we receive the name and email address you provide, the message you compose, and, where you submit a request about a specific vessel, the slug of that listing. Server logs maintained by our hosting provider include your IP address, browser identifier, and request time for a short retention window, used for security and traffic monitoring only.</p>
+
+  <h2>How we use it</h2>
+  <p>Enquiries are read by the director on duty and responded to within two working days. We use the information to answer your message and, where appropriate, to begin a confidential conversation about your vessel. We do not sell, rent, or barter any information you provide.</p>
+
+  <h2>Retention</h2>
+  <p>Enquiries are kept until the matter is closed or you request deletion. Server logs are kept for ninety days unless required longer for security investigation. Client correspondence under retainer is kept for the duration of the engagement and seven years thereafter, in line with maritime professional conventions.</p>
+
+  <h2>Third parties</h2>
+  <p>Site infrastructure is hosted on Cloudflare. Email replies are sent from our own mailbox at office@acmarine.com. No marketing automation, no advertising trackers, no third-party analytics scripts run on this site.</p>
+
+  <h2>Your rights</h2>
+  <p>You may request a copy of the information we hold about you, or its deletion, at any time, by writing to <a href="mailto:office@acmarine.com">office@acmarine.com</a>. We will respond within twenty working days.</p>
+
+  <h2>Contact</h2>
+  <p>Privacy correspondence: <a href="mailto:office@acmarine.com">office@acmarine.com</a>.</p>
+</main>
+
+<dialog id="enquire-dialog" class="enquire-dialog" aria-labelledby="enquire-title">
+  <div class="enquire-inner">
+    <button type="button" class="dialog-close" data-close-enquire aria-label="Close">&times;</button>
+    <p class="eyebrow">Enquire</p>
+    <h2 id="enquire-title">Write to the office.</h2>
+    <form class="enquire-form" id="enquire-form" novalidate>
+      <label class="field"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label class="field field-full"><span>Vessel or matter</span><textarea name="message" rows="5" required></textarea></label>
+      <input type="hidden" name="listing_slug" value="">
+      <button type="submit" class="btn-primary btn-block">Send</button>
+      <p class="form-note" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</dialog>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-mark">Aldridge &amp; Charles Marine</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/articles">Articles</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+    <p class="footer-meta">Monaco &middot; Antibes &middot; Newport &middot; Seattle</p>
+    <p class="footer-fine">&copy; <span id="year"></span> Aldridge &amp; Charles Marine. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/script.js" defer></script>
+</body>
+</html>

@@ -1,12 +1,13 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const grid = document.getElementById('fleet-grid');
-const filters = document.getElementById('fleet-filters');
+const searchForm = document.getElementById('fleet-search');
 let allListings = [];
-let activeFilter = 'all';
+let lengthUnit = 'm';
+let activeStatus = 'all';
 
 function escapeHtml(s) {
-  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
 
 function lengthLabel(l) {
@@ -19,7 +20,6 @@ function lengthLabel(l) {
 function statusLabel(s) {
   if (s === 'sale-pending') return 'Sale Pending';
   if (s === 'sold') return 'Sold';
-  if (s === 'draft') return 'Draft';
   return 'Available';
 }
 
@@ -33,12 +33,8 @@ function renderCard(l) {
   const len = lengthLabel(l.loa_m);
   const price = l.price || 'Price upon request';
   const statusClass = `is-${l.status || 'available'}`;
-
   return `<a class="yacht-card ${statusClass}" href="/yacht/${encodeURIComponent(l.slug)}">
-    <div class="card-image">
-      ${hero}
-      <span class="card-status">${escapeHtml(statusLabel(l.status))}</span>
-    </div>
+    <div class="card-image">${hero}<span class="card-status">${escapeHtml(statusLabel(l.status))}</span></div>
     <div class="card-body">
       <p class="card-meta">${escapeHtml(meta || 'Private commission')}</p>
       <h3 class="card-name">${escapeHtml(l.name)}</h3>
@@ -48,11 +44,59 @@ function renderCard(l) {
   </a>`;
 }
 
-function render() {
-  let items = allListings;
-  if (activeFilter !== 'all') items = items.filter(l => (l.status || 'available') === activeFilter);
+function getFilters() {
+  const fd = new FormData(searchForm);
+  return {
+    type: fd.get('type') || '',
+    condition: fd.get('condition') || '',
+    class_society: fd.get('class_society') || '',
+    builder: (fd.get('builder') || '').toString().trim().toLowerCase(),
+    loa_min: parseFloat(fd.get('loa_min')) || null,
+    loa_max: parseFloat(fd.get('loa_max')) || null,
+    year_min: parseInt(fd.get('year_min')) || null,
+    year_max: parseInt(fd.get('year_max')) || null,
+    price_min: parseFloat(fd.get('price_min')) || null,
+    price_max: parseFloat(fd.get('price_max')) || null,
+  };
+}
+
+function apply() {
+  const f = getFilters();
+  let items = allListings.slice();
+  if (activeStatus !== 'all') items = items.filter(l => (l.status || 'available') === activeStatus);
+  if (f.type) items = items.filter(l => l.type === f.type);
+  if (f.condition) items = items.filter(l => l.condition === f.condition);
+  if (f.class_society) items = items.filter(l => (l.class_society || '').toLowerCase().includes(f.class_society.toLowerCase()));
+  if (f.builder) items = items.filter(l => (l.builder || '').toLowerCase().includes(f.builder));
+  if (f.loa_min !== null || f.loa_max !== null) {
+    items = items.filter(l => {
+      if (typeof l.loa_m !== 'number') return false;
+      const compM = lengthUnit === 'ft'
+        ? { min: f.loa_min !== null ? f.loa_min / 3.28084 : null, max: f.loa_max !== null ? f.loa_max / 3.28084 : null }
+        : { min: f.loa_min, max: f.loa_max };
+      if (compM.min !== null && l.loa_m < compM.min) return false;
+      if (compM.max !== null && l.loa_m > compM.max) return false;
+      return true;
+    });
+  }
+  if (f.year_min !== null || f.year_max !== null) {
+    items = items.filter(l => {
+      if (typeof l.year !== 'number') return false;
+      if (f.year_min !== null && l.year < f.year_min) return false;
+      if (f.year_max !== null && l.year > f.year_max) return false;
+      return true;
+    });
+  }
+  if (f.price_min !== null || f.price_max !== null) {
+    items = items.filter(l => {
+      if (typeof l.price_num !== 'number') return false;
+      if (f.price_min !== null && l.price_num < f.price_min) return false;
+      if (f.price_max !== null && l.price_num > f.price_max) return false;
+      return true;
+    });
+  }
   if (items.length === 0) {
-    grid.innerHTML = '<p class="fleet-empty">No vessels currently match. Please write to the office for matters not yet presented.</p>';
+    grid.innerHTML = '<p class="fleet-empty">No vessels match these filters. Please write to the office for matters not yet presented publicly.</p>';
     return;
   }
   grid.innerHTML = items.map(renderCard).join('');
@@ -63,23 +107,37 @@ async function load() {
     const res = await fetch('/api/listings');
     const data = await res.json();
     allListings = (data.listings || []).filter(l => l.status !== 'draft');
+    const builders = [...new Set(allListings.map(l => l.builder).filter(Boolean))].sort();
+    const dl = document.getElementById('builders-list');
+    if (dl) dl.innerHTML = builders.map(b => `<option value="${escapeHtml(b)}">`).join('');
     if (allListings.length === 0) {
       grid.innerHTML = '<p class="fleet-empty">The current roster is closed. Please write to the office to be introduced to vessels not yet presented publicly.</p>';
       return;
     }
-    filters.hidden = false;
-    render();
+    searchForm.hidden = false;
+    apply();
   } catch (err) {
     grid.innerHTML = '<p class="fleet-empty">Unable to load the fleet at the moment. Please write to the office.</p>';
   }
 }
 
-filters.addEventListener('click', (e) => {
-  const btn = e.target.closest('button[data-filter]');
-  if (!btn) return;
-  activeFilter = btn.dataset.filter;
-  filters.querySelectorAll('button').forEach(b => b.classList.toggle('is-on', b === btn));
-  render();
+searchForm.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
+searchForm.addEventListener('reset', () => setTimeout(apply, 0));
+
+searchForm.querySelectorAll('.fs-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    lengthUnit = btn.dataset.unit;
+    searchForm.querySelectorAll('.fs-toggle button').forEach(b => b.classList.toggle('is-on', b === btn));
+    apply();
+  });
+});
+
+searchForm.querySelectorAll('.fs-statuses button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeStatus = btn.dataset.status;
+    searchForm.querySelectorAll('.fs-statuses button').forEach(b => b.classList.toggle('is-on', b === btn));
+    apply();
+  });
 });
 
 load();
