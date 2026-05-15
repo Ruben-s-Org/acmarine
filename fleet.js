@@ -49,14 +49,19 @@ function getFilters() {
   return {
     type: fd.get('type') || '',
     condition: fd.get('condition') || '',
-    class_society: fd.get('class_society') || '',
+    boatClass: fd.get('boatClass') || '',
     builder: (fd.get('builder') || '').toString().trim().toLowerCase(),
+    boatModel: (fd.get('boatModel') || '').toString().trim().toLowerCase(),
     loa_min: parseFloat(fd.get('loa_min')) || null,
     loa_max: parseFloat(fd.get('loa_max')) || null,
     year_min: parseInt(fd.get('year_min')) || null,
     year_max: parseInt(fd.get('year_max')) || null,
     price_min: parseFloat(fd.get('price_min')) || null,
     price_max: parseFloat(fd.get('price_max')) || null,
+    power_min: parseFloat(fd.get('power_min')) || null,
+    power_max: parseFloat(fd.get('power_max')) || null,
+    engineHours_max: parseFloat(fd.get('engineHours_max')) || null,
+    capacity_min: parseFloat(fd.get('capacity_min')) || null,
   };
 }
 
@@ -66,8 +71,19 @@ function apply() {
   if (activeStatus !== 'all') items = items.filter(l => (l.status || 'available') === activeStatus);
   if (f.type) items = items.filter(l => l.type === f.type);
   if (f.condition) items = items.filter(l => l.condition === f.condition);
-  if (f.class_society) items = items.filter(l => (l.class_society || '').toLowerCase().includes(f.class_society.toLowerCase()));
+  if (f.boatClass) items = items.filter(l => (l.boatClass || '').toLowerCase().includes(f.boatClass.toLowerCase()));
   if (f.builder) items = items.filter(l => (l.builder || '').toLowerCase().includes(f.builder));
+  if (f.boatModel) items = items.filter(l => (l.boatModel || '').toLowerCase().includes(f.boatModel));
+  if (f.power_min !== null || f.power_max !== null) {
+    items = items.filter(l => {
+      if (typeof l.power !== 'number') return false;
+      if (f.power_min !== null && l.power < f.power_min) return false;
+      if (f.power_max !== null && l.power > f.power_max) return false;
+      return true;
+    });
+  }
+  if (f.engineHours_max !== null) items = items.filter(l => typeof l.engineHours === 'number' && l.engineHours <= f.engineHours_max);
+  if (f.capacity_min !== null) items = items.filter(l => typeof l.capacity === 'number' && l.capacity >= f.capacity_min);
   if (f.loa_min !== null || f.loa_max !== null) {
     items = items.filter(l => {
       if (typeof l.loa_m !== 'number') return false;

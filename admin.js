@@ -167,9 +167,15 @@ function openDialog(item) {
   document.getElementById('f-name').value = item?.name || '';
   document.getElementById('f-slug').value = item?.slug || '';
   document.getElementById('f-builder').value = item?.builder || '';
+  document.getElementById('f-boatmodel').value = item?.boatModel || '';
+  document.getElementById('f-boatclass').value = item?.boatClass || '';
   document.getElementById('f-year').value = item?.year || '';
   document.getElementById('f-loa').value = item?.loa_m || '';
   document.getElementById('f-beam').value = item?.beam_m || '';
+  document.getElementById('f-engine').value = item?.engine || '';
+  document.getElementById('f-power').value = item?.power || '';
+  document.getElementById('f-enginehours').value = item?.engineHours || '';
+  document.getElementById('f-capacity').value = item?.capacity || '';
   document.getElementById('f-location').value = item?.location || '';
   document.getElementById('f-price').value = item?.price || '';
   document.getElementById('f-price-num').value = item?.price_num || '';
@@ -242,9 +248,15 @@ dialogSave.addEventListener('click', async () => {
       name: document.getElementById('f-name').value.trim(),
       slug: document.getElementById('f-slug').value.trim() || undefined,
       builder: document.getElementById('f-builder').value.trim() || undefined,
+      boatModel: document.getElementById('f-boatmodel').value.trim() || undefined,
+      boatClass: document.getElementById('f-boatclass').value || undefined,
       year: parseInt(document.getElementById('f-year').value) || undefined,
       loa_m: parseFloat(document.getElementById('f-loa').value) || undefined,
       beam_m: parseFloat(document.getElementById('f-beam').value) || undefined,
+      engine: document.getElementById('f-engine').value.trim() || undefined,
+      power: parseFloat(document.getElementById('f-power').value) || undefined,
+      engineHours: parseFloat(document.getElementById('f-enginehours').value) || undefined,
+      capacity: parseInt(document.getElementById('f-capacity').value) || undefined,
       location: document.getElementById('f-location').value.trim() || undefined,
       price: document.getElementById('f-price').value.trim() || undefined,
       price_num: parseFloat(document.getElementById('f-price-num').value) || undefined,

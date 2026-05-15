@@ -80,16 +80,26 @@
         <select name="type"><option value="">Sail &amp; Motor</option><option value="motor">Motor</option><option value="sail">Sail</option></select>
       </label>
       <label class="fs-field">
-        <span>Condition</span>
-        <select name="condition"><option value="">Any</option><option value="new">New</option><option value="used">Used</option><option value="refit">Recently refit</option></select>
-      </label>
-      <label class="fs-field">
         <span>Class</span>
-        <select name="class_society"><option value="">Any</option><option value="Lloyd's">Lloyd's</option><option value="Bureau Veritas">Bureau Veritas</option><option value="RINA">RINA</option><option value="ABS">ABS</option><option value="DNV">DNV</option><option value="MCA">MCA</option></select>
+        <select name="boatClass">
+          <option value="">Any</option>
+          <option value="Motor Yachts">Motor Yachts</option>
+          <option value="Sailing Yachts">Sailing Yachts</option>
+          <option value="Sport Yachts">Sport Yachts</option>
+          <option value="Mega Yachts">Mega Yachts</option>
+          <option value="Expedition">Expedition</option>
+          <option value="Trawlers">Trawlers</option>
+          <option value="Catamarans">Catamarans</option>
+          <option value="Sport Fishers">Sport Fishers</option>
+        </select>
       </label>
       <label class="fs-field">
         <span>Make</span>
         <input type="text" name="builder" placeholder="Lurssen, Feadship&hellip;" list="builders-list">
+      </label>
+      <label class="fs-field">
+        <span>Model</span>
+        <input type="text" name="boatModel" placeholder="FD80, X65&hellip;">
       </label>
       <datalist id="builders-list"></datalist>
     </div>
@@ -119,16 +129,39 @@
           <input type="number" name="price_max" placeholder="Max" min="0" step="100000">
         </div>
       </div>
+    </div>
+    <div class="fs-row">
+      <div class="fs-field fs-range">
+        <span>Power (hp)</span>
+        <div class="fs-range-row">
+          <input type="number" name="power_min" placeholder="Min" min="0" step="50">
+          <input type="number" name="power_max" placeholder="Max" min="0" step="50">
+        </div>
+      </div>
+      <label class="fs-field">
+        <span>Max engine hours</span>
+        <input type="number" name="engineHours_max" placeholder="Any" min="0" step="100">
+      </label>
+      <label class="fs-field">
+        <span>Min capacity (guests)</span>
+        <input type="number" name="capacity_min" placeholder="Any" min="0" max="100">
+      </label>
+      <label class="fs-field">
+        <span>Condition</span>
+        <select name="condition"><option value="">Any</option><option value="new">New</option><option value="used">Used</option><option value="refit">Recently refit</option></select>
+      </label>
+    </div>
+    <div class="fs-row fs-row-actions">
+      <div class="fs-statuses">
+        <button type="button" data-status="all" class="filter-pill is-on">All listings</button>
+        <button type="button" data-status="available" class="filter-pill">Available</button>
+        <button type="button" data-status="sale-pending" class="filter-pill">Sale Pending</button>
+        <button type="button" data-status="sold" class="filter-pill">Sold</button>
+      </div>
       <div class="fs-field fs-actions">
         <button type="submit" class="btn-primary">Search</button>
         <button type="reset" class="btn-ghost">Reset</button>
       </div>
-    </div>
-    <div class="fs-statuses">
-      <button type="button" data-status="all" class="filter-pill is-on">All listings</button>
-      <button type="button" data-status="available" class="filter-pill">Available</button>
-      <button type="button" data-status="sale-pending" class="filter-pill">Sale Pending</button>
-      <button type="button" data-status="sold" class="filter-pill">Sold</button>
     </div>
   </form>
   <div id="fleet-grid" class="fleet-grid">

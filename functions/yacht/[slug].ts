@@ -31,13 +31,31 @@ function renderHtml(l: Listing): string {
   const gallery = (l.gallery || []).map(g => `<img src="${esc(g)}" alt="${esc(l.name)}" loading="lazy" width="800" height="600">`).join('');
   const specs = l.specs || {};
   const specRows = [
+    ['Class', l.boatClass],
     ['Builder', l.builder],
+    ['Model', l.boatModel],
     ['Year', l.year],
     ['Length overall', len],
     ['Beam', l.beam_m ? `${l.beam_m} m` : ''],
+    ['Capacity', l.capacity ? `${l.capacity} guests` : ''],
+    ['Engine', l.engine],
+    ['Total Power', typeof l.power === 'number' ? `${l.power} hp` : ''],
+    ['Engine Hours', typeof l.engineHours === 'number' ? l.engineHours.toLocaleString() : ''],
+    ['Classification', l.class_society],
+    ['Condition', l.condition ? l.condition.charAt(0).toUpperCase() + l.condition.slice(1) : ''],
     ['Location', l.location],
     ...Object.entries(specs),
   ].filter(([_, v]) => v).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('');
+
+  const specChips = [
+    l.boatClass ? { label: 'Class', value: l.boatClass } : null,
+    l.boatModel ? { label: 'Model', value: l.boatModel } : null,
+    l.year ? { label: 'Year', value: String(l.year) } : null,
+    len ? { label: 'Length', value: len } : null,
+    typeof l.power === 'number' ? { label: 'Power', value: `${l.power} hp` } : null,
+    typeof l.engineHours === 'number' ? { label: 'Engine Hours', value: l.engineHours.toLocaleString() } : null,
+    l.capacity ? { label: 'Capacity', value: `${l.capacity} guests` } : null,
+  ].filter(Boolean).map(c => `<div class="yacht-chip"><span>${esc((c as any).label)}</span><strong>${esc((c as any).value)}</strong></div>`).join('');
 
   const descHtml = (l.description || '').split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join('');
   const jsonLd: any = {
@@ -142,6 +160,8 @@ ${l.hero_image ? `<meta name="twitter:image" content="${esc(l.hero_image)}">` : 
     <button type="button" class="btn-primary" data-open-inquire data-listing="${esc(l.slug)}">Request a Viewing</button>
   </div>
 </section>
+
+${specChips ? `<section class="yacht-chips" aria-label="Specifications at a glance">${specChips}</section>` : ''}
 
 ${gallery ? `<section class="yacht-gallery">${gallery}</section>` : ''}
 

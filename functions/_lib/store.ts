@@ -3,9 +3,15 @@ export interface Listing {
   slug: string;
   name: string;
   builder?: string;
+  boatModel?: string;
+  boatClass?: string;
   year?: number;
   loa_m?: number;
   beam_m?: number;
+  engine?: string;
+  power?: number;
+  engineHours?: number;
+  capacity?: number;
   price?: string;
   price_num?: number;
   location?: string;
